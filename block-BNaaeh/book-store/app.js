@@ -6,7 +6,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var version1Router = require('./routes/version1')
+// var usersRouter = require('./routes/users');
 
 // connecting Database 
 mongoose.connect('mongodb://localhost/book-store', {useNewUrlParser : true , useUnifiedTopology : true}, (err) => {
@@ -26,6 +27,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
+app.use('/api/v1', version1Router)
+app.use('/api/v2', version2Router)
 // app.use('/api/books', usersRouter);
 
 // catch 404 and forward to error handler
